@@ -6,19 +6,24 @@ function Square(props) {
     return (
       <button className="square" onClick={props.onClick}>
         {props.value}
+        
       </button>
     );
   }
   
   class Board extends React.Component {
     renderSquare(i) {
+        if(i==0)  {
+        this.props.squares[i] = <img src={ require('./resources/horse.png')} />;   }
+
       return (
-        <Square
+         <Square 
           value={this.props.squares[i]}
           onClick={() => this.props.onClick(i)}
         />
+
       );
-    }
+    } 
   
     render() {
       return (
@@ -42,6 +47,56 @@ function Square(props) {
             {this.renderSquare(14)}
             {this.renderSquare(15)}
             {this.renderSquare(16)}
+          </div>
+          <div className="board-row">
+          {this.renderSquare(17)}
+            {this.renderSquare(18)}
+            {this.renderSquare(19)}
+            {this.renderSquare(20)}
+            {this.renderSquare(21)}
+            {this.renderSquare(22)}
+            {this.renderSquare(23)}
+            {this.renderSquare(24)}
+          </div>
+          <div className="board-row">
+          {this.renderSquare(17)}
+            {this.renderSquare(18)}
+            {this.renderSquare(19)}
+            {this.renderSquare(20)}
+            {this.renderSquare(21)}
+            {this.renderSquare(22)}
+            {this.renderSquare(23)}
+            {this.renderSquare(24)}
+          </div>
+          <div className="board-row">
+          {this.renderSquare(17)}
+            {this.renderSquare(18)}
+            {this.renderSquare(19)}
+            {this.renderSquare(20)}
+            {this.renderSquare(21)}
+            {this.renderSquare(22)}
+            {this.renderSquare(23)}
+            {this.renderSquare(24)}
+          </div>
+          <div className="board-row">
+          {this.renderSquare(17)}
+            {this.renderSquare(18)}
+            {this.renderSquare(19)}
+            {this.renderSquare(20)}
+            {this.renderSquare(21)}
+            {this.renderSquare(22)}
+            {this.renderSquare(23)}
+            {this.renderSquare(24)}
+          </div>
+          <div className="board-row">
+          {this.renderSquare(17)}
+            {this.renderSquare(18)}
+            {this.renderSquare(19)}
+            {this.renderSquare(20)}
+            {this.renderSquare(21)}
+            {this.renderSquare(22)}
+            {this.renderSquare(23)}
+            {this.renderSquare(24)}
           </div>
           <div className="board-row">
           {this.renderSquare(17)}
@@ -79,7 +134,9 @@ function Square(props) {
       if (calculateWinner(squares) || squares[i]) {
         return;
       }
-      squares[i] = this.state.xIsNext ? "X" : "O";
+      if(i==0) {squares[i] = <img src={ require('./resources/horse.png')} />  }
+      else
+      {  squares[i] = this.state.xIsNext ? "X" : "O"; }
       this.setState({
         history: history.concat([
           {
@@ -122,7 +179,8 @@ function Square(props) {
       }
   
       return (
-        <div className="game">
+        <div className="game"> 
+
           <div className="game-board">
             <Board
               squares={current.squares}
