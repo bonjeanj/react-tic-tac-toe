@@ -18,8 +18,12 @@ function Square(props) {
 
     renderSquare(i) {
       if(this.props.squares[i] == 'H') {  this.props.squares[i] = <img src={ require('./resources/horse.png')} /> } 
-      if(this.props.squares[i] == 'P') {  this.props.squares[i] = <img src={ require('./resources/creepy-yoda.jpg')} /> } 
+      if(this.props.squares[i] == 'P') {  this.props.squares[i] = <img src={ require('./resources/storm-trooper.jpg')} /> } 
       if(this.props.squares[i] == 'R') {  this.props.squares[i] = <img src={ require('./resources/vader.jpeg')} /> } 
+      if(this.props.squares[i] == 'X') {  this.props.squares[i] = <img src={ require('./resources/creepy-yoda.jpg')} /> } 
+      if(this.props.squares[i] == 'K') {  this.props.squares[i] = <img src={ require('./resources/han.jpg')} /> } 
+      if(this.props.squares[i] == 'Q') {  this.props.squares[i] = <img src={ require('./resources/chewy.jpg')} /> } 
+      if(this.props.squares[i] == 'B') {  this.props.squares[i] = <img src={ require('./resources/r2.jpg')} /> } 
       return (
          <Square 
           value={this.props.squares[i]}
