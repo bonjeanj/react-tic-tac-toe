@@ -145,9 +145,7 @@ function Square(props) {
       if (calculateWinner(squares) || squares[i]) {
         return;
       }
-      if(i==0) {squares[i] = <img src={ require('./resources/horse.png')} />  }
-      else
-      {  squares[i] = this.state.xIsNext ? "X" : "O"; }
+      squares[i] = this.state.xIsNext ? "X" : "O";
       this.setState({
         history: history.concat([
           {
