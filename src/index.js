@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 function Square(props) {
+  
     return (
       <button className="square" onClick={props.onClick}>
         {props.value}
@@ -16,12 +17,15 @@ function Square(props) {
       super(props); 
     }
 
+    state = {
+      index: this.props.index }
+
     renderSquare(i) {
       if(this.props.squares[i] == 'H') {  this.props.squares[i] = <img src={ require('./resources/horse.png')} /> } 
       if(this.props.squares[i] == 'P') {  this.props.squares[i] = <img src={ require('./resources/storm-trooper.jpg')} /> } 
-      if(this.props.squares[i] == 'R') {  this.props.squares[i] = <img src={ require('./resources/vader.jpeg')} /> } 
-      if(this.props.squares[i] == 'X') {  this.props.squares[i] = <img src={ require('./resources/creepy-yoda.jpg')} /> } 
-      if(this.props.squares[i] == 'K') {  this.props.squares[i] = <img src={ require('./resources/han.jpg')} /> } 
+      if(this.props.squares[i] == 'R') {  this.props.squares[i] = <img src={ require('./resources/vader.jpeg')}/> } 
+      if(this.props.squares[i] == 'X') {  this.props.squares[i] = <img src={ require('./resources/creepy-yoda.jpg')}/> } 
+      if(this.props.squares[i] == 'K') {  this.props.squares[i] = <img src={ require('./resources/han.jpg')}  /> } 
       if(this.props.squares[i] == 'Q') {  this.props.squares[i] = <img src={ require('./resources/chewy.jpg')} /> } 
       if(this.props.squares[i] == 'B') {  this.props.squares[i] = <img src={ require('./resources/r2.jpg')} /> } 
       return (
@@ -138,18 +142,43 @@ function Square(props) {
           }
         ],
         stepNumber: 0,
-        xIsNext: true
+        xIsNext: true,
+        previous: null,
+        previousIndex: -1
       };
     }
   
     handleClick(i) {
       const history = this.state.history.slice(0, this.state.stepNumber + 1);
       const current = history[history.length - 1];
-      const squares = current.squares.slice();
-      if (calculateWinner(squares) || squares[i]) {
-        return;
+      console.log("Previous"); 
+      console.log(this.previous); 
+      if(this.previous == null) 
+      { 
+        console.log("CURRENT INDEX"); 
+        console.log(i); 
+        this.previousIndex = i;
+        this.previous = current.squares[i];
+        return; 
       }
-      squares[i] = this.state.xIsNext ? "X" : "O";
+      console.log("PREVIOUS INDEX"); 
+      console.log(this.previousIndex); 
+      console.log("BEFORE"); 
+      console.log(current); 
+      current.squares[this.previousIndex] = null; 
+      current.squares[i] = this.previous; 
+      console.log(current.squares[i]); 
+      console.log("After"); 
+      console.log(current); 
+      this.previous = null; 
+      this.previousIndex = null; 
+      
+      const squares = current.squares.slice();
+      // Calculate winner needs to be updated for Chess winner.
+      // if (calculateWinner(squares) || squares[i]) {
+      //   return;
+      // }
+      // squares[i] = this.state.xIsNext ? "X" : "O";
       this.setState({
         history: history.concat([
           {
